@@ -1,16 +1,15 @@
-html,
+@import "~normalize.css";
+
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Roboto";
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+main {
+  max-width: 900px;
+  margin: 55px auto 0 auto;
+  padding: 0 10px;
 }
 
-* {
-  box-sizing: border-box;
+.MuiBox-root .css-1aquho2-MuiTabs-indicator {
+  background-color: #fff;
 }
