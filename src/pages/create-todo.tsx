@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Box from "@mui/material/Box";
-import NewTodo from "../components/TodoInput/NewTodo";
+import { fetchAddTodo } from "../store/reducers/todoMiddleware";
+import TodoInput from "../components/TodoInput/TodoInput";
 
 export default function CreateTodo(): JSX.Element {
   return (
@@ -9,7 +10,7 @@ export default function CreateTodo(): JSX.Element {
         <title>My todo | Create todo</title>
       </Head>
       <Box style={{ display: "flex", justifyContent: "center" }}>
-        <NewTodo />
+        <TodoInput initialState={{ title: "", text: "", completed: false }} todoDispatch={fetchAddTodo} />
       </Box>
     </>
   );

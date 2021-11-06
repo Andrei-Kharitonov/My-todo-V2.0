@@ -30,7 +30,7 @@ export default function MainLayout({ children }: LayoutChildren) {
         setValue(1);
         break;
 
-      case "/all-todo":
+      case "/todo-list":
         setValue(2);
         break;
 
@@ -51,8 +51,8 @@ export default function MainLayout({ children }: LayoutChildren) {
             <Link href="/create-todo" passHref>
               <Tab component="a" label="New todo" style={{ opacity: "1" }} />
             </Link>
-            <Link href="/all-todo" passHref>
-              <Tab component="a" label="All todo" style={{ opacity: "1" }} />
+            <Link href="/todo-list" passHref>
+              <Tab component="a" label="Todo list" style={{ opacity: "1" }} />
             </Link>
           </Tabs>
         </AppBar>

@@ -5,7 +5,7 @@ function TodoPage(): JSX.Element {
 
   return (
     <h2>
-      todo {router.query.id}
+      Todo id: {router.query.id}
     </h2>
   );
 }

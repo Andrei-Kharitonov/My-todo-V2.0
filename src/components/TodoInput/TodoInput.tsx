@@ -1,13 +1,22 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchAddTodo } from "../../store/reducers/todoMiddleware";
 import TextField from "@mui/material/TextField";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from "@mui/icons-material/Send";
 
-export default function NewTodo(): JSX.Element {
-  let [title, setTitle] = useState("");
-  let [text, setText] = useState("");
+interface TodoInputProps {
+  initialState: {
+    title: string,
+    text: string,
+    id?: string,
+    completed: boolean
+  },
+  todoDispatch: any
+};
+
+export default function TodoInput({ initialState, todoDispatch }: TodoInputProps): JSX.Element {
+  let [title, setTitle] = useState(initialState.title);
+  let [text, setText] = useState(initialState.text);
   let [loading, setLoading] = useState(false);
   let dispatch = useDispatch();
 
@@ -15,7 +24,7 @@ export default function NewTodo(): JSX.Element {
     event.preventDefault();
     setLoading(true);
 
-    dispatch(fetchAddTodo({ title, text, completed: false }))
+    dispatch(todoDispatch({ title, text, id: initialState.id, completed: initialState.completed }))
       .then(() => setLoading(false));
 
     setTitle("");

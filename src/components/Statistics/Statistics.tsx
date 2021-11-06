@@ -6,8 +6,10 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import RestoreIcon from "@mui/icons-material/Restore";
 import TodoList from "../TodoList/TodoList";
+import { Styles } from "../../interface/Styles-interface";
+import { RootState } from "../../store/store";
 
-let styles = {
+let styles: Styles = {
   ul: {
     listStyleType: "none",
     padding: 0,
@@ -28,8 +30,8 @@ let styles = {
 };
 
 function Statistics() {
-  let todos = useSelector(state => state.todo.todos);
-  let loading = useSelector(state => state.todo.loading);
+  let todos = useSelector((state: RootState) => state.todo.todos);
+  let loading = useSelector((state: RootState) => state.todo.loading);
 
   let total = todos.length;
   let completed = todos.filter(todo => todo.completed !== false).length;
