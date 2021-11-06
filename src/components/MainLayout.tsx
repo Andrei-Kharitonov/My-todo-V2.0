@@ -1,12 +1,23 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchGetTodos } from "../store/reducers/todoMiddleware";
 import Link from "next/link";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 
-export default function MainLayout({ children }) {
+interface LayoutChildren {
+  children: JSX.Element
+}
+
+export default function MainLayout({ children }: LayoutChildren) {
   let [value, setValue] = useState(0);
+  let dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchGetTodos());
+  }, [dispatch]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -24,7 +35,7 @@ export default function MainLayout({ children }) {
         break;
 
       default:
-        setValue(0);
+        setValue(2);
         break;
     }
   });

@@ -1,0 +1,88 @@
+import React from "react";
+import { useSelector } from "react-redux";
+import CircularProgress from "@mui/material/CircularProgress";
+import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import RestoreIcon from "@mui/icons-material/Restore";
+import TodoList from "../TodoList/TodoList";
+
+let styles = {
+  ul: {
+    listStyleType: "none",
+    padding: 0,
+  },
+  li: {
+    margin: "5px"
+  },
+  card: {
+    marginBottom: "0"
+  },
+  cardContent: {
+    padding: "15px",
+    paddingBottom: "15px"
+  },
+  title: {
+    marginBottom: "10px"
+  },
+};
+
+function Statistics() {
+  let todos = useSelector(state => state.todo.todos);
+  let loading = useSelector(state => state.todo.loading);
+
+  let total = todos.length;
+  let completed = todos.filter(todo => todo.completed !== false).length;
+  let uncompleted = todos.filter(todo => todo.completed !== true).length;
+
+  if (loading) {
+    return (
+      <div>
+        <h3 className="stats">
+          <AssignmentOutlinedIcon style={{ marginBottom: "-5px" }} />&nbsp;
+          Total todo:&nbsp;
+          <CircularProgress size={20} />
+        </h3>
+        <h3 className="stats">
+          <DoneOutlineIcon style={{ marginBottom: "-5px" }} />&nbsp;
+          Completed:&nbsp;
+          <CircularProgress size={20} />
+        </h3>
+        <h3 className="stats">
+          <AccessTimeIcon style={{ marginBottom: "-5px" }} />&nbsp;
+          Not completed:&nbsp;
+          <CircularProgress size={20} />
+        </h3>
+        <h3 className="stats">
+          <RestoreIcon style={{ marginBottom: "-7px", fontSize: "27px" }} />&nbsp;
+          Last todo:&nbsp;
+          <CircularProgress size={20} />
+        </h3>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <h3 className="stats">
+          <AssignmentOutlinedIcon style={{ marginBottom: "-5px" }} />&nbsp;
+          Total todo:&nbsp;{total}
+        </h3>
+        <h3 className="stats">
+          <DoneOutlineIcon style={{ marginBottom: "-5px" }} />&nbsp;
+          Completed:&nbsp;{completed}
+        </h3>
+        <h3 className="stats">
+          <AccessTimeIcon style={{ marginBottom: "-5px" }} />&nbsp;
+          Not completed:&nbsp;{uncompleted}
+        </h3>
+        <h3 className="stats">
+          <RestoreIcon style={{ marginBottom: "-7px", fontSize: "27px" }} />&nbsp;
+          Last todo:&nbsp;
+        </h3>
+        <TodoList allTodos={todos} styles={styles} todoSlice={-1} />
+      </div>
+    );
+  }
+}
+
+export default Statistics;

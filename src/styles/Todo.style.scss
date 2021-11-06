@@ -1,0 +1,58 @@
+.todo {
+  min-width: 250px;
+  margin-bottom: 15px;
+  .todo__container {
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: 450px) {
+      justify-content: flex-start;
+      flex-direction: column;
+    }
+  }
+  .todo__title {
+    padding-right: 10px;
+    font-weight: 500;
+    margin: 0;
+    &_comp {
+      color: #00a152;
+    }
+  }
+  .todo__text {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .todo__date {
+    font-size: 14px;
+    color: #999;
+  }
+  .todo__status {
+    width: 140px;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #1976d2;
+    &_comp {
+      color: #00a152;
+    }
+  }
+  .todo__btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+
+.todoInput-title {
+  margin: 8px 0;
+  input {
+    font-size: 30px;
+    font-weight: 500;
+  }
+}
+
+.todoInput-text {
+  margin: 8px 0;
+  input {
+    font-size: 18px;
+  }
+}
