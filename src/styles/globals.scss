@@ -27,7 +27,7 @@ a {
   text-align: center;
   color: #1976d2;
   font-size: 44px;
-  margin-top: 0;
+  margin-bottom: 16px;
   @media (max-width: 450px) {
     font-size: 32px;
   }
@@ -46,7 +46,7 @@ h2 {
 }
 
 fieldset {
-  border: 3px solid #1976d2;
+  border: 2px solid #1976d2;
   border-radius: 8px;
   margin-bottom: 30px;
   width: 100%;
@@ -58,6 +58,7 @@ fieldset {
   }
   h2 {
     margin: 6px;
+    font-weight: 500;
   }
 }
 

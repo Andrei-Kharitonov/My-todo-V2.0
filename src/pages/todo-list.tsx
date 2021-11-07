@@ -12,26 +12,9 @@ import Fab from "@mui/material/Fab";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import TodoList from "../components/TodoList/TodoList";
 import { Todo } from "../interface/Todo-interface";
-import { Styles } from "../interface/Styles-interface";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import SearchIcon from "@mui/icons-material/Search";
-
-let styles: Styles = {
-  ul: {
-    listStyleType: "none",
-    padding: 0
-  },
-  li: {},
-  card: {},
-  cardContent: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "15px",
-    paddingBottom: "15px"
-  },
-  title: {},
-};
 
 export default function TodoListPage(): JSX.Element {
   let [value, setValue] = useState(0);
@@ -67,7 +50,7 @@ export default function TodoListPage(): JSX.Element {
         <title>My todo | Todo list</title>
       </Head>
       <div>
-        <div style={{ marginBottom: "80px" }}>
+        <div style={{ marginBottom: "100px" }}>
           <FormControl component="fieldset" style={{ display: "block", width: "100%" }}>
             <TextField
               id="search"
@@ -83,7 +66,7 @@ export default function TodoListPage(): JSX.Element {
             />
           </FormControl>
           <hr />
-          <TodoList allTodos={searchedTodos} styles={styles} todoSlice={0} />
+          <TodoList allTodos={searchedTodos} />
         </div>
         <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }} elevation={3}>
           <BottomNavigation

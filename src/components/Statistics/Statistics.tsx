@@ -6,28 +6,7 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import RestoreIcon from "@mui/icons-material/Restore";
 import TodoList from "../TodoList/TodoList";
-import { Styles } from "../../interface/Styles-interface";
 import { RootState } from "../../store/store";
-
-let styles: Styles = {
-  ul: {
-    listStyleType: "none",
-    padding: 0,
-  },
-  li: {
-    margin: "5px"
-  },
-  card: {
-    marginBottom: "0"
-  },
-  cardContent: {
-    padding: "15px",
-    paddingBottom: "15px"
-  },
-  title: {
-    marginBottom: "10px"
-  },
-};
 
 function Statistics() {
   let todos = useSelector((state: RootState) => state.todo.todos);
@@ -39,27 +18,8 @@ function Statistics() {
 
   if (loading) {
     return (
-      <div>
-        <h3 className="stats">
-          <AssignmentOutlinedIcon style={{ marginBottom: "-5px" }} />&nbsp;
-          Total todo:&nbsp;
-          <CircularProgress size={20} />
-        </h3>
-        <h3 className="stats">
-          <DoneOutlineIcon style={{ marginBottom: "-5px" }} />&nbsp;
-          Completed:&nbsp;
-          <CircularProgress size={20} />
-        </h3>
-        <h3 className="stats">
-          <AccessTimeIcon style={{ marginBottom: "-5px" }} />&nbsp;
-          Not completed:&nbsp;
-          <CircularProgress size={20} />
-        </h3>
-        <h3 className="stats">
-          <RestoreIcon style={{ marginBottom: "-7px", fontSize: "27px" }} />&nbsp;
-          Last todo:&nbsp;
-          <CircularProgress size={20} />
-        </h3>
+      <div style={{ height: "180px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <CircularProgress size={60} />
       </div>
     );
   } else {
@@ -79,9 +39,9 @@ function Statistics() {
         </h3>
         <h3 className="stats">
           <RestoreIcon style={{ marginBottom: "-7px", fontSize: "27px" }} />&nbsp;
-          Last todo:&nbsp;
+          Last todo:&nbsp;{total ? "" : "No todos"}
         </h3>
-        <TodoList allTodos={todos} styles={styles} todoSlice={-1} />
+        {total ? <TodoList allTodos={todos} todoSlice={-1} /> : ""}
       </div>
     );
   }
