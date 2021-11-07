@@ -17,7 +17,7 @@ import { RootState } from "../store/store";
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function TodoListPage(): JSX.Element {
-  let [value, setValue] = useState(0);
+  let [sort, setSort] = useState(0);
   let [search, setSearch] = useState("");
   let allTodos: Todo[] = useSelector((state: RootState) => state.todo.todos);
   let completedTodos: Todo[] = allTodos.filter(todo => todo.completed === true);
@@ -26,18 +26,18 @@ export default function TodoListPage(): JSX.Element {
   let [searchedTodos, setSearchedTodo] = useState(selectTodos);
 
   useEffect(() => {
-    if (value == 0) {
+    if (sort == 0) {
       setSelectTodos(allTodos);
       setSearchedTodo(filterTodo(allTodos));
-    } else if (value == 1) {
+    } else if (sort == 1) {
       setSelectTodos(completedTodos);
       setSearchedTodo(filterTodo(completedTodos));
-    } else if (value == 2) {
+    } else if (sort == 2) {
       setSelectTodos(notCompletedTodos);
       setSearchedTodo(filterTodo(notCompletedTodos));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, search, allTodos]);
+  }, [sort, search, allTodos]);
 
 
   function filterTodo(todos: Todo[]): Todo[] {
@@ -71,8 +71,8 @@ export default function TodoListPage(): JSX.Element {
         <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }} elevation={3}>
           <BottomNavigation
             showLabels
-            value={value}
-            onChange={(_event, newValue) => setValue(newValue)}
+            value={sort}
+            onChange={(_event, newValue) => setSort(newValue)}
           >
             <BottomNavigationAction
               label="All todo"

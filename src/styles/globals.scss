@@ -6,7 +6,7 @@ body {
 
 main {
   max-width: 600px;
-  margin: 65px auto 0 auto;
+  margin: 65px auto 20px auto;
   padding: 0 10px;
 }
 
@@ -21,6 +21,10 @@ a {
 
 .css-1gh6k7f-MuiBottomNavigationAction-label {
   opacity: 1;
+}
+
+.css-46bh2p-MuiCardContent-root {
+  padding: 10px;
 }
 
 .title {

@@ -14,10 +14,12 @@ interface TodoInputProps {
     id?: string,
     completed: boolean
   },
+  clearInput: boolean,
+  btnText?: string,
   todoDispatch: any
 };
 
-export default function TodoInput({ initialState, todoDispatch }: TodoInputProps): JSX.Element {
+export default function TodoInput({ initialState, clearInput, btnText, todoDispatch }: TodoInputProps): JSX.Element {
   let [title, setTitle] = useState(initialState.title);
   let [text, setText] = useState(initialState.text);
   let [loading, setLoading] = useState(false);
@@ -25,6 +27,12 @@ export default function TodoInput({ initialState, todoDispatch }: TodoInputProps
 
   function formHandler(event: any) {
     event.preventDefault();
+
+    if (!title) {
+      alert("Input title");
+      return null;
+    }
+
     setLoading(true);
 
     dispatch(todoDispatch(
@@ -37,8 +45,10 @@ export default function TodoInput({ initialState, todoDispatch }: TodoInputProps
     ))
       .then(() => setLoading(false));
 
-    setTitle("");
-    setText("");
+    if (clearInput) {
+      setTitle("");
+      setText("");
+    }
   }
 
   return (
@@ -50,6 +60,7 @@ export default function TodoInput({ initialState, todoDispatch }: TodoInputProps
               className="todoInput-title"
               variant="standard"
               placeholder="Title"
+              style={{ color: initialState.completed ? "#00a152" : "#000" }}
               value={title}
               onChange={event => setTitle(event.target.value)}
             />
@@ -57,6 +68,7 @@ export default function TodoInput({ initialState, todoDispatch }: TodoInputProps
               className="todoInput-text"
               variant="standard"
               placeholder="Text"
+              style={{ color: initialState.completed ? "#00a152" : "#000" }}
               value={text}
               onChange={event => setText(event.target.value)}
             />
@@ -73,7 +85,7 @@ export default function TodoInput({ initialState, todoDispatch }: TodoInputProps
             loading={loading}
             loadingPosition="end"
           >
-            Create todo
+            {btnText ?? "Create todo"}
           </LoadingButton>
         </CardActions>
       </form>

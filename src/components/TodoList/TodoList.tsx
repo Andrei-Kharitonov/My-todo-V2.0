@@ -24,7 +24,11 @@ function TodoList({ allTodos, todoSlice }: TodoListProps): JSX.Element {
     );
   } else if (!todos.length) {
     return (
-      <h3 style={{ textAlign: "center", fontSize: "23px", color: "#2196f3" }}>No todo!</h3>
+      <h3 style={{ textAlign: "center", fontSize: "23px", color: "#2196f3" }}>
+        <Link href="/create-todo">
+          <a>No todo.<br />Create new todo!</a>
+        </Link>
+      </h3>
     );
   } else {
     return (

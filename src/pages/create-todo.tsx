@@ -10,10 +10,11 @@ export default function CreateTodo(): JSX.Element {
         <title>My todo | Create todo</title>
       </Head>
       <Box style={{ display: "flex", justifyContent: "center" }}>
-        {/* <fieldset style={{ padding: "13px" }}>
-          <legend><h2>Create todo</h2></legend> */}
-        <TodoInput initialState={{ title: "", text: "", completed: false }} todoDispatch={fetchAddTodo} />
-        {/* </fieldset> */}
+        <TodoInput
+          initialState={{ title: "", text: "", completed: false }}
+          clearInput={true}
+          todoDispatch={fetchAddTodo}
+        />
       </Box>
     </>
   );
