@@ -31,8 +31,8 @@ export const todoSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchGetTodos.fulfilled, (state, action) => {
-        state.loading = false;
         state.todos = action.payload;
+        state.loading = false;
       })
       .addCase(fetchAddTodo.fulfilled, (state, action) => {
         state.todos.push(action.payload);

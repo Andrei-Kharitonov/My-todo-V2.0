@@ -18,26 +18,26 @@ function Statistics() {
 
   if (loading) {
     return (
-      <div style={{ height: "180px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div className="statistics__loading">
         <CircularProgress size={60} />
       </div>
     );
   } else {
     return (
-      <div>
-        <h3 className="stats">
-          <AssignmentOutlinedIcon style={{ marginBottom: "-5px" }} />&nbsp;
+      <div className="statistics">
+        <h3 className="statistics__stats">
+          <AssignmentOutlinedIcon className="statistics__icon" />&nbsp;
           Total todo:&nbsp;{total}
         </h3>
-        <h3 className="stats">
-          <DoneOutlineIcon style={{ marginBottom: "-5px" }} />&nbsp;
+        <h3 className="statistics__stats">
+          <DoneOutlineIcon className="statistics__icon" />&nbsp;
           Completed:&nbsp;{completed}
         </h3>
-        <h3 className="stats">
-          <AccessTimeIcon style={{ marginBottom: "-5px" }} />&nbsp;
+        <h3 className="statistics__stats">
+          <AccessTimeIcon className="statistics__icon" />&nbsp;
           Not completed:&nbsp;{uncompleted}
         </h3>
-        <h3 className="stats">
+        <h3 className="statistics__stats">
           <RestoreIcon style={{ marginBottom: "-7px", fontSize: "27px" }} />&nbsp;
           Last todo:&nbsp;{total ? "" : "No todos"}
         </h3>

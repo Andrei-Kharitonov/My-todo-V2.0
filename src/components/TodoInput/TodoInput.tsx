@@ -52,12 +52,12 @@ export default function TodoInput({ initialState, clearInput, btnText, todoDispa
   }
 
   return (
-    <Card variant="outlined" style={{ width: "100%" }}>
+    <Card className="todoInput" variant="outlined">
       <form onSubmit={formHandler}>
         <CardContent>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div className="todoInput__container">
             <TextField
-              className="todoInput-title"
+              className="todoInput__title"
               variant="standard"
               placeholder="Title"
               style={{ color: initialState.completed ? "#00a152" : "#000" }}
@@ -65,7 +65,7 @@ export default function TodoInput({ initialState, clearInput, btnText, todoDispa
               onChange={event => setTitle(event.target.value)}
             />
             <TextField
-              className="todoInput-text"
+              className="todoInput__text"
               variant="standard"
               placeholder="Text"
               style={{ color: initialState.completed ? "#00a152" : "#000" }}
@@ -76,11 +76,11 @@ export default function TodoInput({ initialState, clearInput, btnText, todoDispa
         </CardContent>
         <CardActions>
           <LoadingButton
+            className="todoInput__sendBtn"
             type="submit"
             variant="contained"
             size="large"
             id="newTodoBtn"
-            style={{ whiteSpace: "nowrap" }}
             endIcon={<SendIcon />}
             loading={loading}
             loadingPosition="end"

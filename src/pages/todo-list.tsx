@@ -49,15 +49,14 @@ export default function TodoListPage(): JSX.Element {
       <Head>
         <title>My todo | Todo list</title>
       </Head>
-      <div>
-        <div style={{ marginBottom: "100px" }}>
-          <FormControl component="fieldset" style={{ display: "block", width: "100%" }}>
+      <div className="todoListPage">
+        <div className="todoListPage__container">
+          <FormControl className="todoListPage__searchContainer" component="fieldset">
             <TextField
-              id="search"
+              className="todoListPage__search"
               label={<><SearchIcon style={{ marginBottom: "-8px" }} /><span>search todo</span></>}
               variant="outlined"
               fullWidth
-              style={{ marginBottom: "15px" }}
               value={search}
               onInput={(event: any) => {
                 setSearch(event.target.value);
@@ -68,7 +67,7 @@ export default function TodoListPage(): JSX.Element {
           <hr />
           <TodoList allTodos={searchedTodos} />
         </div>
-        <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }} elevation={3}>
+        <Paper className="todoListPage__bottomNavigation" elevation={3}>
           <BottomNavigation
             showLabels
             value={sort}
@@ -90,7 +89,7 @@ export default function TodoListPage(): JSX.Element {
           </BottomNavigation>
         </Paper>
         <Fab
-          style={{ position: "fixed", right: "20px", bottom: "65px" }}
+          className="todoListPage__btnUp"
           size="medium"
           color="primary"
           aria-label="expand"

@@ -18,13 +18,13 @@ function TodoList({ allTodos, todoSlice }: TodoListProps): JSX.Element {
 
   if (loading) {
     return (
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box className="todoList__loading">
         <CircularProgress />
       </Box>
     );
   } else if (!todos.length) {
     return (
-      <h3 style={{ textAlign: "center", fontSize: "23px", color: "#2196f3" }}>
+      <h3 className="todoList__noTodo">
         <Link href="/create-todo">
           <a>No todo.<br />Create new todo!</a>
         </Link>
@@ -32,26 +32,26 @@ function TodoList({ allTodos, todoSlice }: TodoListProps): JSX.Element {
     );
   } else {
     return (
-      <ul style={{ listStyleType: "none", padding: 0 }}>
+      <ul className="todoList__list">
         {todos.map(todo => {
           return (
             <li key={todo.id}>
-              <Card className="todo" variant="outlined">
-                <CardContent style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "15px",
-                  paddingBottom: "15px"
-                }}>
-                  <Link href={`todo/${todo.id}`}>
+              <Card className="todoList__todoCard" variant="outlined">
+                <CardContent
+                  className="todoList__todoCard-container"
+                  style={{ paddingBottom: "15px" }}
+                >
+                  <Link href={"/todo/[id]"} as={`/todo/${todo.id}`}>
                     <a>
-                      <h3 className={todo.completed ? "todo__title todo__title_comp" : "todo__title"}>
+                      <h3 className="todoList__todoCard-title">
                         {todo.title}
                       </h3>
                     </a>
                   </Link>
-                  <div className={todo.completed ? "todo__status todo__status_comp" : "todo__status"}>
+                  <div
+                    className="todoList__todoCard-status"
+                    style={{ color: todo.completed ? "#00a152" : "#1976d2" }}
+                  >
                     {todo.completed ? "Completed" : "Not completed"}
                   </div>
                 </CardContent>

@@ -1,0 +1,35 @@
+.todoList {
+  &__loading {
+    display: flex;
+    justify-content: center;
+  }
+  &__noTodo {
+    text-align: center;
+    font-size: 23px;
+    color: #2196f3;
+  }
+  &__list {
+    list-style-type: none;
+    padding: 0;
+  }
+  &__todoCard {
+    min-width: 250px;
+    margin-bottom: 15px;
+  }
+  &__todoCard-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+  }
+  &__todoCard-title {
+    padding-right: 10px;
+    font-weight: 500;
+    margin: 0;
+  }
+  &__todoCard-status {
+    width: 92px;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+}

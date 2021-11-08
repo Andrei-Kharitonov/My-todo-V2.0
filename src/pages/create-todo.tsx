@@ -9,7 +9,7 @@ export default function CreateTodo(): JSX.Element {
       <Head>
         <title>My todo | Create todo</title>
       </Head>
-      <Box style={{ display: "flex", justifyContent: "center" }}>
+      <Box>
         <TodoInput
           initialState={{ title: "", text: "", completed: false }}
           clearInput={true}

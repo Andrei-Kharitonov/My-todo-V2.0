@@ -58,7 +58,7 @@ export default function TodoPage(): JSX.Element {
         <Head>
           <title>My todo | Todo</title>
         </Head>
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "250px" }}>
+        <Box className="todo__loading">
           <CircularProgress size={60} />
         </Box>
       </>
@@ -69,7 +69,7 @@ export default function TodoPage(): JSX.Element {
         <Head>
           <title>My todo | Todo: {todo.title}</title>
         </Head>
-        <Card variant="outlined" style={{ width: "100%" }}>
+        <Card className="todo__container" variant="outlined">
           <CardContent>
             <TodoInput
               initialState={{
@@ -84,18 +84,18 @@ export default function TodoPage(): JSX.Element {
             />
           </CardContent>
           <CardContent>
-            <p style={{ color: "#999" }}>
+            <p className="todo__date">
               {todo.date}
             </p>
-            <p style={{ color: todo.completed ? "#00a152" : "#000" }}>
+            <p style={{ color: todo.completed ? "#00a152" : "#1976d2" }}>
               Status: {todo.completed ? "Completed" : "Not completed"}
             </p>
           </CardContent>
-          <CardActions style={{ padding: "10px", display: "flex", flexDirection: "column" }}>
+          <CardActions className="todo__actions">
             <Button
+              className="todo__btn"
               variant="outlined"
               color="success"
-              style={{ width: "100%", margin: "4px" }}
               startIcon={<DoneOutlineIcon />}
               disabled={todo.completed}
               onClick={() => complete(todo.id)}
@@ -103,9 +103,9 @@ export default function TodoPage(): JSX.Element {
               Complete
             </Button>
             <Button
+              className="todo__btn"
               variant="outlined"
               color="error"
-              style={{ width: "100%", margin: "4px" }}
               startIcon={<DeleteIcon />}
               onClick={() => remove(todo.id)}
             >
@@ -120,7 +120,7 @@ export default function TodoPage(): JSX.Element {
       <>
         <h2>Error!!!<br />This todo does not exist!</h2>
         <Link href="/">
-          <a style={{ textDecoration: "underline", fontSize: "20px", color: "#2196f3" }}>Back to main page</a>
+          <a className="todo__error">Back to main page</a>
         </Link>
       </>
     );

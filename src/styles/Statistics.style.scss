@@ -1,0 +1,14 @@
+.statistics {
+  &__loading {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__stats {
+    color: #2196f3;
+  }
+  &__icon {
+    margin-bottom: -5px;
+  }
+}

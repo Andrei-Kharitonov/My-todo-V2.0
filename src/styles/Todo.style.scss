@@ -1,62 +1,32 @@
 .todo {
-  min-width: 250px;
-  margin-bottom: 15px;
-  .todo__container {
+  &__loading {
     display: flex;
-    justify-content: space-between;
-    @media (max-width: 450px) {
-      justify-content: flex-start;
-      flex-direction: column;
-    }
+    justify-content: center;
+    align-items: center;
+    height: 250px;
   }
-  .todo__title {
-    padding-right: 10px;
-    font-weight: 500;
-    margin: 0;
-    &_comp {
-      color: #00a152;
-    }
+  &__error {
+    text-decoration: underline;
+    font-size: 20px;
+    color: #2196f3;
   }
-  .todo__text {
-    font-size: 16px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  &__container {
+    width: 100%;
   }
-  .todo__date {
-    font-size: 14px;
-    color: #999;
+  &__date {
+    color: rgb(97, 97, 97);
   }
-  .todo__status {
-    width: 92px;
-    white-space: nowrap;
-    font-size: 14px;
-    color: #1976d2;
-    &_comp {
-      color: #00a152;
-    }
-  }
-  .todo__btns {
+  &__actions {
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+  }
+  &__btn {
+    width: 100%;
+    margin: 5px;
   }
 }
 
 .css-1480iag-MuiInputBase-root-MuiInput-root {
   color: inherit;
-}
-
-.todoInput-title {
-  margin: 8px 0;
-  input {
-    font-size: 27px;
-    font-weight: 500;
-  }
-}
-
-.todoInput-text {
-  margin: 8px 0;
-  input {
-    font-size: 16px;
-  }
 }
