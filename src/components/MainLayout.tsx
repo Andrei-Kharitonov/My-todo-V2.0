@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchGetTodos } from "../../store/reducers/todoMiddleware";
+import { fetchGetTodos } from "../store/reducers/todoMiddleware";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import Tabs from "@mui/material/Tabs";

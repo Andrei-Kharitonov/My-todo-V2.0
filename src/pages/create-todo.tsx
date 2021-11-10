@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Box from "@mui/material/Box";
 import { fetchAddTodo } from "../store/reducers/todoMiddleware";
-import TodoInput from "../components/TodoInput/TodoInput";
+import TodoInput from "../components/TodoInput";
 
 export default function CreateTodo(): JSX.Element {
   return (

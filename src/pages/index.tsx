@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Statistics from "../components/Statistics/Statistics";
+import Statistics from "../components/Statistics";
 
 export default function Main(): JSX.Element {
   return (

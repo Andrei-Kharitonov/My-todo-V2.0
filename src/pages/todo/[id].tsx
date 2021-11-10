@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
-import TodoInput from "../../components/TodoInput/TodoInput";
+import TodoInput from "../../components/TodoInput";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { fetchRedactTodo } from "../../store/reducers/todoMiddleware";
@@ -37,7 +37,7 @@ export default function TodoPage(): JSX.Element {
   }
 
   function remove(id: string): void {
-    let confirmation = confirm("Do you really want delete this todo");
+    let confirmation = confirm("Delete this todo?");
 
     if (confirmation) {
       dispatch(deleteTodo(id));

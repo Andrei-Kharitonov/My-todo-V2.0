@@ -5,8 +5,8 @@ import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import RestoreIcon from "@mui/icons-material/Restore";
-import TodoList from "../TodoList/TodoList";
-import { RootState } from "../../store/store";
+import TodoList from "./TodoList";
+import { RootState } from "../store/store";
 
 function Statistics() {
   let todos = useSelector((state: RootState) => state.todo.todos);

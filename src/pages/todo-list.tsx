@@ -10,7 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Fab from "@mui/material/Fab";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import TodoList from "../components/TodoList/TodoList";
+import TodoList from "../components/TodoList";
 import { Todo } from "../interface/Todo-interface";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";

@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Link from "next/link";
-import { Todo } from "../../interface/Todo-interface";
-import { RootState } from "../../store/store";
+import { Todo } from "../interface/Todo-interface";
+import { RootState } from "../store/store";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
@@ -19,14 +19,14 @@ function TodoList({ allTodos, todoSlice }: TodoListProps): JSX.Element {
   if (loading) {
     return (
       <Box className="todoList__loading">
-        <CircularProgress />
+        <CircularProgress size={45} />
       </Box>
     );
   } else if (!todos.length) {
     return (
       <h3 className="todoList__noTodo">
         <Link href="/create-todo">
-          <a>No todo.<br />Create new todo!</a>
+          <a>No todos!</a>
         </Link>
       </h3>
     );
@@ -43,7 +43,10 @@ function TodoList({ allTodos, todoSlice }: TodoListProps): JSX.Element {
                 >
                   <Link href={"/todo/[id]"} as={`/todo/${todo.id}`}>
                     <a>
-                      <h3 className="todoList__todoCard-title">
+                      <h3
+                        className="todoList__todoCard-title"
+                        style={{ color: todo.completed ? "#00a152" : "inherit" }}
+                      >
                         {todo.title}
                       </h3>
                     </a>
