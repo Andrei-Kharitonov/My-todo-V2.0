@@ -39,7 +39,7 @@ function TodoList({ allTodos, todoSlice }: TodoListProps): JSX.Element {
               <Card className="todoList__todoCard" variant="outlined">
                 <CardContent
                   className="todoList__todoCard-container"
-                  style={{ paddingBottom: "15px" }}
+                  style={{ padding: "15px", paddingBottom: "15px" }}
                 >
                   <Link href={"/todo/[id]"} as={`/todo/${todo.id}`}>
                     <a>

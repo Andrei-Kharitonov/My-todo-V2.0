@@ -49,11 +49,11 @@ export default function TodoListPage(): JSX.Element {
       <Head>
         <title>My todo | Todo list</title>
       </Head>
-      <div className="todoListPage">
-        <div className="todoListPage__container">
-          <FormControl className="todoListPage__searchContainer" component="fieldset">
+      <div>
+        <div style={{ marginBottom: "120px" }}>
+          <FormControl style={{ display: "block", width: "100%" }} component="fieldset">
             <TextField
-              className="todoListPage__search"
+              style={{ marginBottom: "15px" }}
               label={<><SearchIcon style={{ marginBottom: "-8px" }} /><span>search todo</span></>}
               variant="outlined"
               fullWidth
@@ -67,7 +67,12 @@ export default function TodoListPage(): JSX.Element {
           <hr />
           <TodoList allTodos={searchedTodos} />
         </div>
-        <Paper className="todoListPage__bottomNavigation" elevation={3}>
+        <Paper style={{
+          position: "fixed",
+          bottom: "0",
+          left: "0",
+          right: "0"
+        }} elevation={3}>
           <BottomNavigation
             showLabels
             value={sort}
@@ -89,7 +94,12 @@ export default function TodoListPage(): JSX.Element {
           </BottomNavigation>
         </Paper>
         <Fab
-          className="todoListPage__btnUp"
+          // className="todoListPage__btnUp"
+          style={{
+            position: "fixed",
+            right: "20px",
+            bottom: "65px"
+          }}
           size="medium"
           color="primary"
           aria-label="expand"

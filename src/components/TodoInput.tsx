@@ -60,7 +60,7 @@ export default function TodoInput({ initialState, clearInput, btnText, todoDispa
               className="todoInput__title"
               variant="standard"
               placeholder="Title"
-              style={{ color: initialState.completed ? "#00a152" : "#000" }}
+              style={{ color: initialState.completed ? "#00a152" : "#000", margin: "8px 0" }}
               value={title}
               onChange={event => setTitle(event.target.value)}
             />
@@ -68,7 +68,7 @@ export default function TodoInput({ initialState, clearInput, btnText, todoDispa
               className="todoInput__text"
               variant="standard"
               placeholder="Text"
-              style={{ color: initialState.completed ? "#00a152" : "#000" }}
+              style={{ color: initialState.completed ? "#00a152" : "#000", margin: "8px 0" }}
               value={text}
               onChange={event => setText(event.target.value)}
             />

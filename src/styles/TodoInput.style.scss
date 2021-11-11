@@ -4,18 +4,12 @@
     display: flex;
     flex-direction: column;
   }
-  &__title {
-    margin: 8px 0;
-    input {
-      font-size: 27px;
-      font-weight: 500;
-    }
+  &__title input {
+    font-size: 27px;
+    font-weight: 500;
   }
-  &__text {
-    margin: 8px 0;
-    input {
-      font-size: 16px;
-    }
+  &__text input {
+    font-size: 16px;
   }
   &__sendBtn {
     white-space: nowrap;

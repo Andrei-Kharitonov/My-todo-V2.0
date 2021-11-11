@@ -15,20 +15,20 @@ a {
   text-decoration: none;
 }
 
-.MuiBox-root .css-1aquho2-MuiTabs-indicator {
+.MuiTabs-root .MuiTabs-indicator {
   background-color: #fff;
 }
 
-.css-1gh6k7f-MuiBottomNavigationAction-label {
-  opacity: 1;
-}
-
-.css-46bh2p-MuiCardContent-root {
+.MuiCard-root .MuiCardContent-root {
   padding: 10px;
 }
 
-.css-1t6e9jv-MuiCardActions-root>:not(:first-of-type) {
+.MuiCardActions-root>:not(:first-of-type) {
   margin-left: 5px;
+}
+
+.MuiFormControl-root .MuiInput-root {
+  color: inherit;
 }
 
 .title {

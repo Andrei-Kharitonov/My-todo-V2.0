@@ -93,7 +93,7 @@ export default function TodoPage(): JSX.Element {
           </CardContent>
           <CardActions className="todo__actions">
             <Button
-              className="todo__btn"
+              style={{ width: "100%", margin: "5px" }}
               variant="outlined"
               color="success"
               startIcon={<DoneOutlineIcon />}
@@ -103,7 +103,7 @@ export default function TodoPage(): JSX.Element {
               Complete
             </Button>
             <Button
-              className="todo__btn"
+              style={{ width: "100%", margin: "5px", marginLeft: "5px" }}
               variant="outlined"
               color="error"
               startIcon={<DeleteIcon />}
