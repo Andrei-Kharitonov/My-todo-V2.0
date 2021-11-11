@@ -1,7 +1,7 @@
 {
     "theme_color": "#048cf8",
     "background_color": "#1976d2",
-    "display": "minimal-ui",
+    "display": "fullscreen",
     "scope": "/",
     "start_url": "/",
     "name": "My todo",
