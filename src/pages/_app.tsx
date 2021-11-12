@@ -1,7 +1,6 @@
 import "../styles/globals.scss";
 import "../styles/Todo.style.scss";
 import "../styles/TodoInput.style.scss";
-import "../styles/TodoListPage.style.scss";
 import "../styles/TodoList.style.scss";
 import "../styles/Todo.style.scss";
 import "../styles/Statistics.style.scss";
