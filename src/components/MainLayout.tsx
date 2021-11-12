@@ -12,7 +12,7 @@ interface LayoutChildren {
 }
 
 export default function MainLayout({ children }: LayoutChildren) {
-  let [value, setValue] = useState(0);
+  let [page, setPage] = useState(0);
   let dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,19 +23,19 @@ export default function MainLayout({ children }: LayoutChildren) {
   useEffect(() => {
     switch (window.location.pathname) {
       case "/":
-        setValue(0);
+        setPage(0);
         break;
 
       case "/create-todo":
-        setValue(1);
+        setPage(1);
         break;
 
       case "/todo-list":
-        setValue(2);
+        setPage(2);
         break;
 
       default:
-        setValue(2);
+        setPage(2);
         break;
     }
   });
@@ -43,8 +43,16 @@ export default function MainLayout({ children }: LayoutChildren) {
   return (
     <>
       <Box>
-        <AppBar position="fixed" style={{ borderRadius: "0 0 12px 12px", padding: "0 10px", width: "auto", left: "3px", right: "3px" }}>
-          <Tabs value={value} centered>
+        <AppBar
+          position="fixed"
+          style={{
+            borderRadius: "0 0 12px 12px",
+            padding: "0 10px",
+            width: "auto",
+            left: "3px",
+            right: "3px"
+          }}>
+          <Tabs value={page} centered>
             <Link href="/" passHref>
               <Tab component="a" label="Main" style={{ opacity: "1" }} />
             </Link>

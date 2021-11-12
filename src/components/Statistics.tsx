@@ -1,11 +1,10 @@
-import React from "react";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
 import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import RestoreIcon from "@mui/icons-material/Restore";
-import TodoList from "./TodoList";
 import { RootState } from "../store/store";
 
 function Statistics() {
@@ -15,6 +14,7 @@ function Statistics() {
   let total = todos.length;
   let completed = todos.filter(todo => todo.completed !== false).length;
   let uncompleted = todos.filter(todo => todo.completed !== true).length;
+  let last = todos[todos.length - 1];
 
   if (loading) {
     return (
@@ -39,9 +39,15 @@ function Statistics() {
         </h3>
         <h3 className="statistics__stats">
           <RestoreIcon style={{ marginBottom: "-7px", fontSize: "27px" }} />&nbsp;
-          Last todo:&nbsp;{total ? "" : "No todos"}
+          Last todo:&nbsp;
+          {total ? (
+            <Link href={"/todo/[id]"} as={`/todo/${last.id}`}>
+              <a style={{ color: last.completed ? "#00a152" : "#272727", fontWeight: 500, textDecoration: "underline" }}>
+                {last.title}
+              </a>
+            </Link>
+          ) : ("No todos")}
         </h3>
-        {total ? <TodoList allTodos={todos} todoSlice={-1} /> : ""}
       </div>
     );
   }
