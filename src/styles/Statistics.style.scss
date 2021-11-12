@@ -1,12 +1,11 @@
 .statistics {
   &__loading {
-    height: 174px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   &__stats {
-    margin-top: 6px;
     color: #2196f3;
   }
   &__icon {

@@ -1,0 +1,23 @@
+.todoListPage {
+  &__container {
+    margin-bottom: 100px;
+  }
+  &__searchContainer {
+    display: block;
+    width: 100%;
+  }
+  &__search {
+    margin-bottom: 15px;
+  }
+  &__btnUp {
+    position: fixed;
+    right: 20px;
+    bottom: 65px;
+  }
+  &__bottomNavigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}

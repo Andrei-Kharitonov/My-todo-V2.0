@@ -1,10 +1,15 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import TodoInput from "../../components/TodoInput";
-import { InferGetStaticPropsType } from "next";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import { fetchRedactTodo } from "../../store/reducers/todoMiddleware";
 import { Todo } from "../../interface/Todo-interface";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { useDispatch } from "react-redux";
+import { deleteTodo, completeTodo } from "../../store/reducers/todoSlice";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -12,61 +17,17 @@ import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 
-export async function getStaticPaths() {
-  let todos: Todo[] = await fetch("https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos.json")
-    .then(response => response.json())
-    .then(response => {
-      if (response) {
-        return Object.keys(response).map(key => ({ ...response[key], id: key }));
-      } else return [];
-    })
-    .catch(error => {
-      alert(error.message);
-      return [];
-    });
-
-  let paths = todos.map((todo) => ({
-    params: { id: todo.id },
-  }));
-
-  return { paths, fallback: false };
-}
-
-export const getStaticProps = async ({ params }: any) => {
-  let todo: Todo = await fetch(`https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos/${params.id}.json`, {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json"
-    }
-  })
-    .then(response => response.json())
-    .then(response => {
-      if (response) {
-        let todo = response;
-        todo.id = params.id;
-        return todo;
-      } else return [];
-    })
-    .catch(error => {
-      alert(error.message);
-      return [];
-    });
-
-  return {
-    props: {
-      todo
-    }
-  };
-};
-
-export default function TodoPage({ todo }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-  let [todoCompleted, setTodoCompleted] = useState(todo.completed);
+export default function TodoPage(): JSX.Element {
   let router = useRouter();
+  let loading = useSelector((state: RootState) => state.todo.loading);
+  let allTodos: Todo[] = useSelector((state: RootState) => state.todo.todos);
+  let todo: Todo = allTodos.filter(todo => todo.id == router.query.id)[0];
+  let dispatch = useDispatch();
 
   function complete(id: string): void {
-    setTodoCompleted(true);
+    dispatch(completeTodo(id));
 
-    fetch(`https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos/${id}/completed.json`, {
+    fetch(`https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos/${todo.id}/completed.json`, {
       method: "PUT",
       body: JSON.stringify(true),
       headers: {
@@ -79,37 +40,30 @@ export default function TodoPage({ todo }: InferGetStaticPropsType<typeof getSta
     let confirmation = confirm("Delete this todo?");
 
     if (confirmation) {
-      fetch(`https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos/${id}.json`, {
+      dispatch(deleteTodo(id));
+      router.push("/todo-list");
+
+      fetch(`https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos/${todo.id}.json`, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json"
         }
-      }).then(() => router.push("/todo-list"));
+      });
     }
   }
 
-  function fetchRedactTodo(todoState: Todo) {
-    let redactedTodo = {
-      completed: todoState.completed,
-      date: "Changed: " + new Date().toLocaleString(),
-      title: todoState.title,
-      text: todoState.text,
-      id: todoState.id
-    };
-
-    return fetch(`https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos/${todoState.id}.json`, {
-      method: "PUT",
-      body: JSON.stringify(redactedTodo),
-      headers: {
-        "Content-type": "application/json"
-      }
-    })
-      .then(response => response.json())
-      .then(() => redactedTodo)
-      .catch(error => alert(error.message));
-  };
-
-  if (todo !== undefined || null) {
+  if (loading) {
+    return (
+      <>
+        <Head>
+          <title>My todo | Todo</title>
+        </Head>
+        <Box className="todo__loading">
+          <CircularProgress size={60} />
+        </Box>
+      </>
+    );
+  } else if (todo !== undefined || null) {
     return (
       <>
         <Head>
@@ -122,19 +76,19 @@ export default function TodoPage({ todo }: InferGetStaticPropsType<typeof getSta
                 title: todo.title,
                 text: todo.text,
                 id: todo.id,
-                completed: todoCompleted
+                completed: todo.completed
               }}
               clearInput={false}
               btnText="Redact todo"
-              todoSend={fetchRedactTodo}
+              todoDispatch={fetchRedactTodo}
             />
           </CardContent>
           <CardContent>
             <p className="todo__date">
               {todo.date}
             </p>
-            <p style={{ color: todoCompleted ? "#00a152" : "#1976d2" }}>
-              Status: {todoCompleted ? "Completed" : "Not completed"}
+            <p style={{ color: todo.completed ? "#00a152" : "#1976d2" }}>
+              Status: {todo.completed ? "Completed" : "Not completed"}
             </p>
           </CardContent>
           <CardActions className="todo__actions">
@@ -143,7 +97,7 @@ export default function TodoPage({ todo }: InferGetStaticPropsType<typeof getSta
               variant="outlined"
               color="success"
               startIcon={<DoneOutlineIcon />}
-              disabled={todoCompleted}
+              disabled={todo.completed}
               onClick={() => complete(todo.id)}
             >
               Complete

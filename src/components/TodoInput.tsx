@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import TextField from "@mui/material/TextField";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from "@mui/icons-material/Send";
@@ -15,29 +16,34 @@ interface TodoInputProps {
   },
   clearInput: boolean,
   btnText?: string,
-  todoSend: any
+  todoDispatch: any
 };
 
-export default function TodoInput({ initialState, clearInput, btnText, todoSend }: TodoInputProps): JSX.Element {
+export default function TodoInput({ initialState, clearInput, btnText, todoDispatch }: TodoInputProps): JSX.Element {
   let [title, setTitle] = useState(initialState.title);
   let [text, setText] = useState(initialState.text);
   let [loading, setLoading] = useState(false);
+  let dispatch = useDispatch();
 
   function formHandler(event: any) {
     event.preventDefault();
-    setLoading(true);
 
     if (!title) {
-      alert("Input title!");
+      alert("Input title");
       return null;
     }
 
-    todoSend({
-      title,
-      text,
-      id: initialState.id,
-      completed: initialState.completed
-    }).then(() => setLoading(false));
+    setLoading(true);
+
+    dispatch(todoDispatch(
+      {
+        title,
+        text,
+        id: initialState.id,
+        completed: initialState.completed
+      }
+    ))
+      .then(() => setLoading(false));
 
     if (clearInput) {
       setTitle("");

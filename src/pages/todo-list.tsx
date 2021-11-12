@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { InferGetStaticPropsType } from "next";
 import { useState, useEffect } from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
@@ -13,28 +12,14 @@ import Fab from "@mui/material/Fab";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import TodoList from "../components/TodoList";
 import { Todo } from "../interface/Todo-interface";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 import SearchIcon from "@mui/icons-material/Search";
 
-export const getStaticProps = async () => {
-  let allTodos: Todo[] = await fetch("https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos.json")
-    .then(response => response.json())
-    .then(response => {
-      if (response) {
-        return Object.keys(response).map(key => ({ ...response[key], id: key }));
-      } else return [];
-    })
-    .catch(error => {
-      alert(error.message);
-      return [];
-    });
-
-  return { props: { allTodos } };
-};
-
-export default function TodoListPage({ allTodos }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
+export default function TodoListPage(): JSX.Element {
   let [sort, setSort] = useState(0);
   let [search, setSearch] = useState("");
-  //let allTodos: Todo[] = useSelector((state: RootState) => state.todo.todos);
+  let allTodos: Todo[] = useSelector((state: RootState) => state.todo.todos);
   let completedTodos: Todo[] = allTodos.filter(todo => todo.completed === true);
   let notCompletedTodos: Todo[] = allTodos.filter(todo => todo.completed === false);
   let [selectTodos, setSelectTodos] = useState(allTodos);
@@ -80,7 +65,7 @@ export default function TodoListPage({ allTodos }: InferGetStaticPropsType<typeo
             />
           </FormControl>
           <hr />
-          <TodoList todos={searchedTodos} />
+          <TodoList allTodos={searchedTodos} />
         </div>
         <Paper style={{
           position: "fixed",
