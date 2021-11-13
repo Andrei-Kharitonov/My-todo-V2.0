@@ -36,29 +36,29 @@ function TodoList({ allTodos, todoSlice }: TodoListProps): JSX.Element {
         {todos.map(todo => {
           return (
             <li key={todo.id}>
-              <Card className="todoList__todoCard" variant="outlined">
-                <CardContent
-                  className="todoList__todoCard-container"
-                  style={{ padding: "15px", paddingBottom: "15px" }}
-                >
-                  <Link href={"/todo/[id]"} as={`/todo/${todo.id}`}>
-                    <a>
+              <Link href={"/todo/[id]"} as={`/todo/${todo.id}`}>
+                <a>
+                  <Card className="todoList__todoCard" variant="outlined">
+                    <CardContent
+                      className="todoList__todoCard-container"
+                      style={{ padding: "15px", paddingBottom: "15px" }}
+                    >
                       <h3
                         className="todoList__todoCard-title"
                         style={{ color: todo.completed ? "#00a152" : "inherit" }}
                       >
                         {todo.title}
                       </h3>
-                    </a>
-                  </Link>
-                  <div
-                    className="todoList__todoCard-status"
-                    style={{ color: todo.completed ? "#00a152" : "#1976d2" }}
-                  >
-                    {todo.completed ? "Completed" : "Not completed"}
-                  </div>
-                </CardContent>
-              </Card>
+                      <div
+                        className="todoList__todoCard-status"
+                        style={{ color: todo.completed ? "#00a152" : "#1976d2" }}
+                      >
+                        {todo.completed ? "Completed" : "Not completed"}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </a>
+              </Link>
             </li>
           );
         })}

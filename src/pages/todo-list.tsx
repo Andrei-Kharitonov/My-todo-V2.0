@@ -53,7 +53,7 @@ export default function TodoListPage(): JSX.Element {
         <div style={{ marginBottom: "120px" }}>
           <FormControl style={{ display: "block", width: "100%" }} component="fieldset">
             <TextField
-              style={{ marginBottom: "15px" }}
+              style={{ marginBottom: "10px" }}
               label={<><SearchIcon style={{ marginBottom: "-8px" }} /><span>search todo</span></>}
               variant="outlined"
               fullWidth
