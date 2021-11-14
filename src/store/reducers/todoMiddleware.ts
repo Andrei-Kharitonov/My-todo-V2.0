@@ -19,10 +19,18 @@ export const fetchGetTodos: any = createAsyncThunk("todo/fetchTodos", async () =
     .then(response => response.json())
     .then(response => {
       if (response) {
-        return Object.keys(response).map(key => ({ ...response[key], id: key }));
-      } else return [];
+        let todos = Object.keys(response).map(key => ({ ...response[key], id: key }));
+        localStorage.setItem("todos", JSON.stringify(todos));
+        return todos;
+      } else {
+        localStorage.setItem("todos", JSON.stringify([]));
+        return [];
+      };
     })
-    .catch(error => alert(error.message));
+    .catch(error => {
+      alert("ERROR!!! " + error.message + ". App will work offline");
+      return JSON.parse(localStorage.getItem("todos") || "[]");
+    });
 });
 
 export const fetchAddTodo: any = createAsyncThunk("todo/fetchAddTodo", async (todoState: Todo) => {

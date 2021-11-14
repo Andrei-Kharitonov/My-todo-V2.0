@@ -29,7 +29,7 @@ export default function TodoInput({ initialState, clearInput, btnText, todoDispa
     event.preventDefault();
 
     if (!title) {
-      alert("Input title");
+      alert("Input title!");
       return null;
     }
 
