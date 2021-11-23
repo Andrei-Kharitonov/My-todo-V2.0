@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchGetTodos, fetchAddTodo, fetchRedactTodo } from "./todoMiddleware";
+import { createSlice } from "@reduxjs/toolkit";
+import { getTodos, addTodo, redactTodo, completeTodo, deleteTodo } from "./todoMiddleware";
 import { Todo } from "../../interface/Todo-interface";
 
 interface TodoState {
@@ -15,41 +15,39 @@ const initialState: TodoState = {
 export const todoSlice = createSlice({
   name: "todo",
   initialState,
-  reducers: {
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
-    },
-    deleteTodo: (state, action: PayloadAction<string>) => {
-      let id = action.payload;
-      state.todos = state.todos.filter(todo => todo.id !== id);
-    },
-    completeTodo: (state, action: PayloadAction<string>) => {
-      let id = action.payload;
-      state.todos = state.todos.map(todo => todo.id == id ? Object.assign({}, todo, { completed: true }) : todo);
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchGetTodos.fulfilled, (state, action) => {
+      .addCase(getTodos.fulfilled, (state, action) => {
         state.todos = action.payload;
         state.loading = false;
       })
-      .addCase(fetchAddTodo.fulfilled, (state, action) => {
-        state.todos.push(action.payload);
+      .addCase(addTodo.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.todos.push(action.payload);
+        }
       })
-      .addCase(fetchRedactTodo.fulfilled, (state, action) => {
-        let id = action.payload!.id;
-        state.todos = state.todos.map(todo => todo.id == id
-          ? Object.assign({}, todo, {
-            title: action.payload!.title,
-            text: action.payload!.text,
-            date: action.payload!.date
-          })
-          : todo);
+      .addCase(redactTodo.fulfilled, (state, action) => {
+        if (action.payload) {
+          let id = action.payload!.id;
+          state.todos = state.todos.map(todo => todo.id == id
+            ? Object.assign({}, todo, {
+              title: action.payload.title,
+              text: action.payload.text,
+              date: action.payload.date
+            })
+            : todo);
+        }
+      })
+      .addCase(completeTodo.fulfilled, (state, action) => {
+        let id = action.payload;
+        state.todos = state.todos.map(todo => todo.id == id ? Object.assign({}, todo, { completed: true }) : todo);
+      })
+      .addCase(deleteTodo.fulfilled, (state, action) => {
+        let id = action.payload;
+        state.todos = state.todos.filter(todo => todo.id !== id);
       });
   }
 });
-
-export const { setLoading, deleteTodo, completeTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;

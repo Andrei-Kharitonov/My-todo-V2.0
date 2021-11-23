@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Todo } from "../../interface/Todo-interface";
 
+const url = "https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app";
+
 interface NewTodo {
   title: string,
   text: string,
@@ -9,13 +11,8 @@ interface NewTodo {
   id?: string
 }
 
-export const fetchGetTodos: any = createAsyncThunk("todo/fetchTodos", async () => {
-  return fetch("https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos.json", {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json"
-    }
-  })
+export const getTodos: any = createAsyncThunk("todo/get", async () => {
+  return fetch(`${url}/todos.json`)
     .then(response => response.json())
     .then(response => {
       if (response) {
@@ -23,17 +20,17 @@ export const fetchGetTodos: any = createAsyncThunk("todo/fetchTodos", async () =
         localStorage.setItem("todos", JSON.stringify(todos));
         return todos;
       } else {
-        localStorage.setItem("todos", JSON.stringify([]));
+        localStorage.clear();
         return [];
       };
     })
-    .catch(error => {
-      alert("ERROR!!! " + error.message + ". App will work offline");
-      return JSON.parse(localStorage.getItem("todos") || "[]");
+    .catch(e => {
+      alert("ERROR!!! " + e.message + ". App will work offline");
+      return JSON.parse(localStorage.getItem("todos") ?? "[]");
     });
 });
 
-export const fetchAddTodo: any = createAsyncThunk("todo/fetchAddTodo", async (todoState: Todo) => {
+export const addTodo: any = createAsyncThunk("todo/add", async (todoState: Todo) => {
   let newTodo: NewTodo = {
     completed: todoState.completed,
     date: "Date: " + new Date().toLocaleString(),
@@ -41,7 +38,7 @@ export const fetchAddTodo: any = createAsyncThunk("todo/fetchAddTodo", async (to
     text: todoState.text
   };
 
-  return fetch("https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos.json", {
+  return fetch(`${url}/todos.json`, {
     method: "POST",
     body: JSON.stringify(newTodo),
     headers: {
@@ -53,10 +50,10 @@ export const fetchAddTodo: any = createAsyncThunk("todo/fetchAddTodo", async (to
       newTodo.id = response.name;
       return newTodo;
     })
-    .catch(error => alert(error.message));
+    .catch(e => alert(e.message));
 });
 
-export const fetchRedactTodo: any = createAsyncThunk("todo/fetchRedactTodo", async (todoState: Todo) => {
+export const redactTodo: any = createAsyncThunk("todo/redact", async (todoState: Todo) => {
   let redactedTodo = {
     completed: todoState.completed,
     date: "Changed: " + new Date().toLocaleString(),
@@ -65,7 +62,7 @@ export const fetchRedactTodo: any = createAsyncThunk("todo/fetchRedactTodo", asy
     id: todoState.id
   };
 
-  return fetch(`https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos/${todoState.id}.json`, {
+  return fetch(`${url}/todos/${todoState.id}.json`, {
     method: "PUT",
     body: JSON.stringify(redactedTodo),
     headers: {
@@ -74,5 +71,30 @@ export const fetchRedactTodo: any = createAsyncThunk("todo/fetchRedactTodo", asy
   })
     .then(response => response.json())
     .then(() => redactedTodo)
-    .catch(error => alert(error.message));
+    .catch(e => alert(e.message));
+});
+
+export const completeTodo: any = createAsyncThunk("todo/complete", async (id: string) => {
+  return fetch(`${url}/todos/${id}/completed.json`, {
+    method: "PUT",
+    body: JSON.stringify(true),
+    headers: {
+      "Content-type": "application/json"
+    }
+  })
+    .then(response => response.json())
+    .then(() => id)
+    .catch(e => alert(e.message));
+});
+
+export const deleteTodo: any = createAsyncThunk("todo/delete", async (id: string) => {
+  return fetch(`${url}/todos/${id}.json`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json"
+    }
+  })
+    .then(response => response.json())
+    .then(() => id)
+    .catch(e => alert(e.message));
 });

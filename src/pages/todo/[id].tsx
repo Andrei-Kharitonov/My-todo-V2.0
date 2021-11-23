@@ -4,12 +4,12 @@ import { useRouter } from "next/dist/client/router";
 import TodoInput from "../../components/TodoInput";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import { fetchRedactTodo } from "../../store/reducers/todoMiddleware";
+import { redactTodo } from "../../store/reducers/todoMiddleware";
 import { Todo } from "../../interface/Todo-interface";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useDispatch } from "react-redux";
-import { deleteTodo, completeTodo } from "../../store/reducers/todoSlice";
+import { completeTodo, deleteTodo } from "../../store/reducers/todoMiddleware";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -24,30 +24,16 @@ export default function TodoPage(): JSX.Element {
   let todo: Todo = allTodos.filter(todo => todo.id == router.query.id)[0];
   let dispatch = useDispatch();
 
-  function complete(id: string): void {
+  function complete(id: string) {
     dispatch(completeTodo(id));
-
-    fetch(`https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos/${todo.id}/completed.json`, {
-      method: "PUT",
-      body: JSON.stringify(true),
-      headers: {
-        "Content-type": "application/json"
-      }
-    });
   }
 
-  function remove(id: string): void {
+  function remove(id: string) {
     let confirmation = confirm("Delete this todo?");
 
     if (confirmation) {
-      dispatch(deleteTodo(id));
-      router.push("/todo-list");
-
-      fetch(`https://react-todo-list-15fdb-default-rtdb.europe-west1.firebasedatabase.app/todos/${todo.id}.json`, {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json"
-        }
+      dispatch(deleteTodo(id)).then(() => {
+        router.push("/todo-list");
       });
     }
   }
@@ -80,7 +66,7 @@ export default function TodoPage(): JSX.Element {
               }}
               clearInput={false}
               btnText="Redact todo"
-              todoDispatch={fetchRedactTodo}
+              todoDispatch={redactTodo}
             />
           </CardContent>
           <CardContent>
@@ -118,7 +104,7 @@ export default function TodoPage(): JSX.Element {
   } else {
     return (
       <>
-        <h2>Error!!!<br />This todo does not exist!</h2>
+        <h2>Error 404<br />Todo not found</h2>
         <Link href="/">
           <a className="todo__error">Back to main page</a>
         </Link>

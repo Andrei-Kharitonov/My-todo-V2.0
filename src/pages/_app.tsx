@@ -6,7 +6,7 @@ import "../styles/Todo.style.scss";
 import "../styles/Statistics.style.scss";
 import Head from "next/head";
 import type { AppProps } from "next/app";
-import MainLayout from "../components/MainLayout";
+import Navigation from "../components/Navigation";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
 
@@ -17,9 +17,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Provider store={store}>
-        <MainLayout>
+        <Navigation>
           <Component {...pageProps} />
-        </MainLayout>
+        </Navigation>
       </Provider>
     </>
   );

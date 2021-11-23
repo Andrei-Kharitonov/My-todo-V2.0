@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchGetTodos } from "../store/reducers/todoMiddleware";
+import { getTodos } from "../store/reducers/todoMiddleware";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import Tabs from "@mui/material/Tabs";
@@ -11,12 +11,12 @@ interface LayoutChildren {
   children: JSX.Element
 }
 
-export default function MainLayout({ children }: LayoutChildren) {
+export default function Navigation({ children }: LayoutChildren) {
   let [page, setPage] = useState(0);
   let dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchGetTodos());
+    dispatch(getTodos());
   }, [dispatch]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
