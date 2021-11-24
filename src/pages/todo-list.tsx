@@ -50,7 +50,7 @@ export default function TodoListPage(): JSX.Element {
         <title>My todo | Todo list</title>
       </Head>
       <div>
-        <div style={{ marginBottom: "120px" }}>
+        <div style={{ marginBottom: "125px" }}>
           <FormControl style={{ display: "block", width: "100%" }} component="fieldset">
             <TextField
               style={{ marginBottom: "10px" }}
@@ -65,7 +65,7 @@ export default function TodoListPage(): JSX.Element {
             />
           </FormControl>
           <hr />
-          <TodoList allTodos={searchedTodos} />
+          <TodoList todos={searchedTodos} />
         </div>
         <Paper style={{
           position: "fixed",
@@ -98,7 +98,7 @@ export default function TodoListPage(): JSX.Element {
           style={{
             position: "fixed",
             right: "20px",
-            bottom: "65px"
+            bottom: "70px"
           }}
           size="medium"
           color="primary"

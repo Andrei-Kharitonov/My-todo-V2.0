@@ -10,7 +10,7 @@ import Navigation from "../components/Navigation";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -24,5 +24,3 @@ function MyApp({ Component, pageProps }: AppProps) {
     </>
   );
 }
-
-export default MyApp;

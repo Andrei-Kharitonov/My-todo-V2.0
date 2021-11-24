@@ -8,13 +8,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
 interface TodoListProps {
-  allTodos: Todo[],
-  todoSlice?: number
+  todos: Todo[],
 };
 
-function TodoList({ allTodos, todoSlice }: TodoListProps): JSX.Element {
+function TodoList({ todos }: TodoListProps): JSX.Element {
   let loading = useSelector((state: RootState) => state.todo.loading);
-  let todos = allTodos.slice(todoSlice ?? 0);
 
   if (loading) {
     return (
