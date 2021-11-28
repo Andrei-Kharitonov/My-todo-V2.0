@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Todo } from "../../interface/Todo-interface";
 
-const url = "https://my-todo-v2-default-rtdb.europe-west1.firebasedatabase.app/";
+const url = "https://my-todo-v2-default-rtdb.europe-west1.firebasedatabase.app";
 
 interface NewTodo {
   title: string,
